@@ -14,7 +14,6 @@ import {
   Download,
   Loader2,
   AlertCircle,
-  ExternalLink,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 
@@ -28,7 +27,6 @@ export default function ContactSection() {
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [directGmailLaunched, setDirectGmailLaunched] = useState(false);
 
   const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -45,44 +43,10 @@ export default function ContactSection() {
     }));
   };
 
-  const buildSubject = () => {
-    const topic = formData.topic.trim() || "Technical Collaboration / Opportunity";
-    const name = formData.name.trim() || "Visitor";
-    return `[Portfolio Inquiry] ${topic} — from ${name}`;
-  };
-
-  const buildBody = () => {
-    return `Name: ${formData.name || "(Not provided)"}\nEmail: ${formData.email || "(Not provided)"}\nTopic: ${formData.topic || "General Discussion"}\n\nMessage:\n${formData.message}\n\n— Sent via Md. Kamruzzaman's Portfolio`;
-  };
-
-  const getGmailComposeUrl = () => {
-    const su = encodeURIComponent(buildSubject());
-    const body = encodeURIComponent(buildBody());
-    return `https://mail.google.com/mail/?view=cm&fs=1&to=sohel.eightb@gmail.com&su=${su}&body=${body}`;
-  };
-
-  const getMailtoUrl = () => {
-    const su = encodeURIComponent(buildSubject());
-    const body = encodeURIComponent(buildBody());
-    return `mailto:sohel.eightb@gmail.com?subject=${su}&body=${body}`;
-  };
-
-  const handleDirectGmail = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!formData.message.trim()) {
-      alert("Please enter a message before launching Gmail.");
-      return;
-    }
-    window.open(getGmailComposeUrl(), "_blank", "noopener,noreferrer");
-    setDirectGmailLaunched(true);
-    setStatus("success");
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
     setErrorMessage("");
-    setDirectGmailLaunched(false);
 
     try {
       const response = await fetch("/api/contact", {
@@ -104,13 +68,8 @@ export default function ContactSection() {
       if (response.ok && data.success) {
         setStatus("success");
         setFormData({ name: "", email: "", topic: "", message: "" });
-      } else if (data.needsSetup) {
-        // Automatically open the user's Gmail with fields pre-filled directly to sohel.eightb@gmail.com
-        window.open(data.gmailComposeUrl || getGmailComposeUrl(), "_blank", "noopener,noreferrer");
-        setDirectGmailLaunched(true);
-        setStatus("success");
       } else {
-        throw new Error(data.error || "Unable to transmit dispatch.");
+        throw new Error(data.error || data.message || "Failed to deliver message.");
       }
     } catch (err: unknown) {
       console.error("Submission failed:", err);
@@ -118,7 +77,7 @@ export default function ContactSection() {
       setErrorMessage(
         err instanceof Error
           ? err.message
-          : "Network dispatch failed. Use the direct Gmail composer below to transmit immediately."
+          : "Dispatch failed to transmit. Please check configuration."
       );
     }
   };
@@ -311,35 +270,20 @@ export default function ContactSection() {
                 </div>
                 <div className="space-y-1">
                   <div className="text-sm font-mono text-[#dfe7e0] tracking-wider uppercase">
-                    {directGmailLaunched
-                      ? "✓ Gmail Compose Tab Opened"
-                      : "✓ Dispatch Transmitted Directly to Gmail"}
+                    ✓ Dispatch Transmitted Directly to Gmail
                   </div>
                   <p className="text-xs text-[#aab4ad] font-light max-w-sm mx-auto leading-relaxed">
-                    {directGmailLaunched
-                      ? "Your pre-filled message opened in Gmail addressed to sohel.eightb@gmail.com. Simply click 'Send' in your Gmail window to deliver!"
-                      : "Your message was transmitted directly to sohel.eightb@gmail.com. Md. Kamruzzaman will review and reply to your email promptly."}
+                    Your message was delivered directly to <span className="text-[#dfe7e0] font-mono font-medium">sohel.eightb@gmail.com</span>. Md. Kamruzzaman will review and reply to your email promptly.
                   </p>
                 </div>
 
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-                  {directGmailLaunched && (
-                    <a
-                      href={getGmailComposeUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#e0231c] text-white text-xs font-mono uppercase tracking-wider hover:bg-[#ff4d36] transition-all shadow-md shadow-[#e0231c]/25"
-                    >
-                      <span>Re-open in Gmail</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+                <div className="pt-2">
                   <button
                     onClick={() => {
                       setStatus("idle");
-                      setDirectGmailLaunched(false);
+                      setErrorMessage("");
                     }}
-                    className="px-4 py-2 rounded-lg border border-white/15 text-xs font-mono text-[#aab4ad] hover:text-white hover:bg-white/5 transition-all"
+                    className="px-5 py-2 rounded-lg border border-white/15 text-xs font-mono text-[#aab4ad] hover:text-white hover:bg-white/5 transition-all"
                   >
                     Send Another Dispatch
                   </button>
@@ -348,28 +292,10 @@ export default function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {status === "error" && (
-                  <div className="p-4 rounded-lg bg-[#e0231c]/10 border border-[#e0231c]/30 text-xs text-[#dfe7e0] space-y-3">
+                  <div className="p-4 rounded-lg bg-[#e0231c]/10 border border-[#e0231c]/30 text-xs text-[#dfe7e0] space-y-2">
                     <div className="flex items-center gap-2 font-mono text-[#e0231c]">
                       <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{errorMessage}</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <a
-                        href={getGmailComposeUrl()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#e0231c] text-white font-mono text-[11px] uppercase tracking-wider hover:bg-[#ff4d36] transition-all"
-                      >
-                        <span>Open in Gmail (Pre-filled)</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                      <a
-                        href={getMailtoUrl()}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-white/20 text-[#dfe7e0] font-mono text-[11px] uppercase tracking-wider hover:bg-white/5 transition-all"
-                      >
-                        <span>Default Mail App</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
                     </div>
                   </div>
                 )}
@@ -435,7 +361,7 @@ export default function ContactSection() {
                   />
                 </div>
 
-                <div className="pt-2 flex flex-wrap items-center gap-3">
+                <div className="pt-2">
                   <Magnet padding={35} magnetStrength={2}>
                     <button
                       type="submit"
@@ -455,17 +381,6 @@ export default function ContactSection() {
                       )}
                     </button>
                   </Magnet>
-
-                  <button
-                    type="button"
-                    onClick={handleDirectGmail}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-[#05070a] text-[#aab4ad] hover:text-white hover:border-white/25 text-xs font-mono tracking-wider uppercase transition-all cursor-pointer"
-                    title="Open message in Gmail compose window directly"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-[#e0231c]" />
-                    <span>Open in Gmail</span>
-                    <ExternalLink className="w-3 h-3 text-[#78837c]" />
-                  </button>
                 </div>
               </form>
             )}
