@@ -255,11 +255,7 @@ export default function Home() {
                 {PERSONAL_INFO.name}
               </span>
             </div>
-            <p className="text-xs text-[#78837c] font-light max-w-md leading-relaxed">
-              Designed in the Kage Kyoto temple night study philosophy. Built with Next.js 16, Three.js WebGL procedural environmental rendering, and Lenis inertia physics.
-            </p>
           </div>
-
           <div className="flex flex-col md:items-end gap-1.5 text-xs font-mono text-[#78837c]">
             <span className="text-[#aab4ad]">
               <ShinyText text="ALL SYSTEMS NOMINAL // 2026" speed={4} />
