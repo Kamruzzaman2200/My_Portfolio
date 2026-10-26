@@ -45,8 +45,29 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("loading");
     setErrorMessage("");
+
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName) {
+      setStatus("error");
+      setErrorMessage("Sender name is required before transmitting.");
+      return;
+    }
+    if (!trimmedEmail || !trimmedEmail.includes("@")) {
+      setStatus("error");
+      setErrorMessage("A valid electronic mail address is required.");
+      return;
+    }
+    if (!trimmedMessage) {
+      setStatus("error");
+      setErrorMessage("Please enter a message before transmitting.");
+      return;
+    }
+
+    setStatus("loading");
 
     try {
       const response = await fetch("/api/contact", {
@@ -56,10 +77,10 @@ export default function ContactSection() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          topic: formData.topic,
-          message: formData.message,
+          name: trimmedName,
+          email: trimmedEmail,
+          topic: formData.topic.trim(),
+          message: trimmedMessage,
         }),
       });
 
@@ -69,16 +90,12 @@ export default function ContactSection() {
         setStatus("success");
         setFormData({ name: "", email: "", topic: "", message: "" });
       } else {
-        throw new Error(data.error || data.message || "Failed to deliver message.");
+        setStatus("error");
+        setErrorMessage(data.error || data.message || "Failed to deliver message.");
       }
-    } catch (err: unknown) {
-      console.error("Submission failed:", err);
+    } catch {
       setStatus("error");
-      setErrorMessage(
-        err instanceof Error
-          ? err.message
-          : "Dispatch failed to transmit. Please check configuration."
-      );
+      setErrorMessage("Dispatch failed to transmit. Please check your network connection.");
     }
   };
 
