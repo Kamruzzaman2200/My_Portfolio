@@ -21,7 +21,7 @@ export default function KageBackground() {
 
     // 1. Scene & Camera
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x05070a, 0.0018);
+    scene.fog = new THREE.FogExp2(0x1a1c1e, 0.0018);
 
     const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
     camera.position.set(0, 0, 50);
@@ -34,21 +34,23 @@ export default function KageBackground() {
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x05070a, 1);
+    renderer.setClearColor(0x1a1c1e, 1);
     mountRef.current.appendChild(renderer.domElement);
 
-    // 3. Vermilion Blood Moon
+    // 3. Electric Blue Orb (replaces Vermilion Blood Moon)
+    let baseMoonX = width < 768 ? 8 : (width > 1600 ? 22 : 16);
+    let baseMoonY = width < 768 ? 14 : 12;
+
     const moonGeo = new THREE.CircleGeometry(9.5, 64);
-    // Radial gradient glow texture for the moon
     const moonCanvas = document.createElement("canvas");
     moonCanvas.width = 512;
     moonCanvas.height = 512;
     const ctx = moonCanvas.getContext("2d")!;
     const grad = ctx.createRadialGradient(256, 256, 40, 256, 256, 256);
-    grad.addColorStop(0, "#ff4d36");
-    grad.addColorStop(0.45, "#e0231c");
-    grad.addColorStop(0.75, "rgba(224, 35, 28, 0.45)");
-    grad.addColorStop(1, "rgba(224, 35, 28, 0)");
+    grad.addColorStop(0, "#3D9BFF");
+    grad.addColorStop(0.45, "#0E76F1");
+    grad.addColorStop(0.75, "rgba(14, 118, 241, 0.45)");
+    grad.addColorStop(1, "rgba(14, 118, 241, 0)");
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.arc(256, 256, 256, 0, Math.PI * 2);
@@ -62,19 +64,19 @@ export default function KageBackground() {
       depthWrite: false,
     });
     const moonMesh = new THREE.Mesh(moonGeo, moonMat);
-    moonMesh.position.set(16, 12, -35);
+    moonMesh.position.set(baseMoonX, baseMoonY, -35);
     scene.add(moonMesh);
 
-    // Subtle moon outer halo ring
+    // Subtle orb outer halo ring
     const haloGeo = new THREE.RingGeometry(9.4, 22, 64);
     const haloCanvas = document.createElement("canvas");
     haloCanvas.width = 512;
     haloCanvas.height = 512;
     const hCtx = haloCanvas.getContext("2d")!;
     const hGrad = hCtx.createRadialGradient(256, 256, 150, 256, 256, 256);
-    hGrad.addColorStop(0, "rgba(224, 35, 28, 0.25)");
-    hGrad.addColorStop(0.6, "rgba(255, 90, 60, 0.08)");
-    hGrad.addColorStop(1, "rgba(5, 7, 10, 0)");
+    hGrad.addColorStop(0, "rgba(14, 118, 241, 0.25)");
+    hGrad.addColorStop(0.6, "rgba(61, 155, 255, 0.08)");
+    hGrad.addColorStop(1, "rgba(26, 28, 30, 0)");
     hCtx.fillStyle = hGrad;
     hCtx.fillRect(0, 0, 512, 512);
 
@@ -87,10 +89,10 @@ export default function KageBackground() {
       depthWrite: false,
     });
     const haloMesh = new THREE.Mesh(haloGeo, haloMat);
-    haloMesh.position.set(16, 12, -36);
+    haloMesh.position.set(baseMoonX, baseMoonY, -36);
     scene.add(haloMesh);
 
-    // 4. Drifting Autumn Leaves / Kyoto Temple Embers Particle System
+    // 4. Drifting Sand & Electric particles
     const particleCount = 220;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -117,17 +119,17 @@ export default function KageBackground() {
 
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-    // Particle texture (leaf/ember diamond shape)
+    // Particle texture — diamond shape in electric blue / sand mix
     const pCanvas = document.createElement("canvas");
     pCanvas.width = 64;
     pCanvas.height = 64;
     const pCtx = pCanvas.getContext("2d")!;
     pCtx.translate(32, 32);
     pCtx.rotate(Math.PI / 4);
-    pCtx.fillStyle = "#ff5a3c";
+    pCtx.fillStyle = "#0E76F1";
     pCtx.fillRect(-14, -14, 28, 28);
     // Soft glow outline
-    pCtx.strokeStyle = "rgba(224, 35, 28, 0.8)";
+    pCtx.strokeStyle = "rgba(14, 118, 241, 0.8)";
     pCtx.lineWidth = 4;
     pCtx.strokeRect(-14, -14, 28, 28);
 
@@ -144,7 +146,7 @@ export default function KageBackground() {
     const particles = new THREE.Points(geometry, pMat);
     scene.add(particles);
 
-    // 5. Subtle ambient starlight / dust particles
+    // 5. Subtle ambient starlight / sand dust particles
     const starCount = 180;
     const starGeo = new THREE.BufferGeometry();
     const starPos = new Float32Array(starCount * 3);
@@ -156,7 +158,7 @@ export default function KageBackground() {
     starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
     const starMat = new THREE.PointsMaterial({
       size: 0.6,
-      color: 0xdfe7e0,
+      color: 0xc2b280,
       transparent: true,
       opacity: 0.35,
       depthWrite: false,
@@ -183,6 +185,11 @@ export default function KageBackground() {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+
+      baseMoonX = w < 768 ? 8 : (w > 1600 ? 22 : 16);
+      baseMoonY = w < 768 ? 14 : 12;
+      moonMesh.position.x = baseMoonX;
+      haloMesh.position.x = baseMoonX;
     };
     window.addEventListener("resize", handleResize);
 
@@ -208,11 +215,11 @@ export default function KageBackground() {
       camera.position.x = mouseX * 2.2;
       camera.lookAt(mouseX * 1.5, camera.position.y - 1, 0);
 
-      // Moon subtle breathing
+      // Orb subtle breathing
       const pulse = 1 + Math.sin(elapsedTime * 0.8) * 0.03;
       moonMesh.scale.set(pulse, pulse, 1);
       haloMesh.scale.set(pulse, pulse, 1);
-      moonMesh.position.y = 12 + Math.cos(elapsedTime * 0.5) * 0.5;
+      moonMesh.position.y = baseMoonY + Math.cos(elapsedTime * 0.5) * 0.5;
       haloMesh.position.y = moonMesh.position.y;
 
       // Particle physics: flutter and wrap
@@ -269,7 +276,7 @@ export default function KageBackground() {
         className="fixed inset-0 -z-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(130% 100% at 50% 40%, transparent 42%, rgba(2, 4, 7, 0.75) 88%, rgba(2, 4, 7, 0.95) 100%)",
+            "radial-gradient(130% 100% at 50% 40%, transparent 42%, rgba(26, 28, 30, 0.75) 88%, rgba(26, 28, 30, 0.95) 100%)",
         }}
         aria-hidden="true"
       />

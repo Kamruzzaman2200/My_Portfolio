@@ -59,34 +59,34 @@ export async function POST(request: Request) {
       subject: fullSubject,
       text: `New Portfolio Message\n\nName: ${name}\nEmail: ${email}\nTopic: ${subjectTopic}\n\nMessage:\n${message}\n\nSent at: ${new Date().toISOString()}`,
       html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #05070a; color: #dfe7e0; padding: 32px 20px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #1a221d;">
-          <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; margin-bottom: 24px;">
-            <span style="color: #e0231c; font-size: 11px; font-family: monospace; letter-spacing: 0.2em; text-transform: uppercase;">Direct Dispatch · Portfolio Transmission</span>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #1A1C1E; color: #C2B280; padding: 32px 20px; border-radius: 14px; max-width: 600px; margin: 0 auto; border: 1px solid rgba(194, 178, 128, 0.15);">
+          <div style="border-bottom: 1px solid rgba(194, 178, 128, 0.12); padding-bottom: 16px; margin-bottom: 24px;">
+            <span style="color: #0E76F1; font-size: 11px; font-family: monospace; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;">Direct Dispatch · Portfolio Transmission</span>
             <h2 style="color: #ffffff; font-size: 22px; margin: 8px 0 0 0; font-weight: 400;">New Message Received</h2>
           </div>
           
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px;">
             <tr>
-              <td style="padding: 10px 0; color: #78837c; width: 90px; font-family: monospace; font-size: 12px; text-transform: uppercase;">From</td>
+              <td style="padding: 10px 0; color: #7A7568; width: 90px; font-family: monospace; font-size: 12px; text-transform: uppercase;">From</td>
               <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${name}</td>
             </tr>
             <tr>
-              <td style="padding: 10px 0; color: #78837c; font-family: monospace; font-size: 12px; text-transform: uppercase;">Email</td>
-              <td style="padding: 10px 0;"><a href="mailto:${email}" style="color: #e0231c; text-decoration: none;">${email}</a></td>
+              <td style="padding: 10px 0; color: #7A7568; font-family: monospace; font-size: 12px; text-transform: uppercase;">Email</td>
+              <td style="padding: 10px 0;"><a href="mailto:${email}" style="color: #0E76F1; text-decoration: none;">${email}</a></td>
             </tr>
             <tr>
-              <td style="padding: 10px 0; color: #78837c; font-family: monospace; font-size: 12px; text-transform: uppercase;">Topic</td>
-              <td style="padding: 10px 0; color: #dfe7e0;">${subjectTopic}</td>
+              <td style="padding: 10px 0; color: #7A7568; font-family: monospace; font-size: 12px; text-transform: uppercase;">Topic</td>
+              <td style="padding: 10px 0; color: #C2B280;">${subjectTopic}</td>
             </tr>
           </table>
 
-          <div style="background-color: #0d1217; border-left: 3px solid #e0231c; padding: 18px; border-radius: 6px; margin-bottom: 24px;">
-            <div style="color: #78837c; font-size: 11px; font-family: monospace; text-transform: uppercase; margin-bottom: 8px;">Message Content</div>
-            <div style="color: #dfe7e0; line-height: 1.6; white-space: pre-wrap; font-size: 14px;">${message}</div>
+          <div style="background-color: #2B2D2F; border-left: 3px solid #0E76F1; padding: 18px; border-radius: 8px; margin-bottom: 24px;">
+            <div style="color: #7A7568; font-size: 11px; font-family: monospace; text-transform: uppercase; margin-bottom: 8px;">Message Content</div>
+            <div style="color: #C2B280; line-height: 1.6; white-space: pre-wrap; font-size: 14px;">${message}</div>
           </div>
 
-          <div style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);">
-            <a href="mailto:${email}?subject=${encodeURIComponent(`Re: ${fullSubject}`)}" style="display: inline-block; background-color: #e0231c; color: #ffffff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 13px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
+          <div style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(194, 178, 128, 0.12);">
+            <a href="mailto:${email}?subject=${encodeURIComponent(`Re: ${fullSubject}`)}" style="display: inline-block; background-color: #0E76F1; color: #ffffff; padding: 12px 26px; border-radius: 8px; text-decoration: none; font-size: 13px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; box-shadow: 0 4px 14px rgba(14, 118, 241, 0.3);">
               Reply Directly to ${name}
             </a>
           </div>

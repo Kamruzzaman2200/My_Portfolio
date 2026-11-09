@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import SpotlightCard from "@/components/react-bits/SpotlightCard";
 import Magnet from "@/components/react-bits/Magnet";
@@ -100,61 +101,67 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative space-y-10 scroll-mt-28">
+    <section id="contact" className="relative space-y-10 sm:space-y-12 lg:space-y-16 scroll-mt-28">
       {/* Chapter Header */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e0231c] shadow-[0_0_8px_#e0231c]" />
-          <span className="text-[10px] font-mono tracking-[0.25em] text-[#aab4ad] uppercase">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="w-2 h-2 rounded-full bg-[#0E76F1] shadow-[0_0_10px_#0E76F1]" />
+          <span className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[#9A8E6A] uppercase">
             Chapter // 06
           </span>
-          <div className="h-px bg-white/10 flex-1" />
-          <span className="font-kanji text-xl text-white/30 tracking-widest hidden sm:inline">
+          <div className="h-px bg-[#C2B280]/15 flex-1" />
+          <span className="font-kanji text-xl sm:text-2xl 2xl:text-3xl text-[#C2B280]/30 tracking-widest hidden sm:inline">
             結 · INITIATE CONTACT
           </span>
         </div>
 
-        <div className="space-y-2">
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-[#dfe7e0]">
+        <div className="space-y-2 sm:space-y-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-light tracking-tight text-[#C2B280]">
             Direct Transmission & Inquiries
           </h2>
-          <p className="text-xs sm:text-sm text-[#78837c] max-w-xl font-light leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg 2xl:text-xl text-[#7A7568] max-w-2xl 2xl:max-w-3xl font-light leading-relaxed">
             Every submission is delivered directly to{" "}
-            <span className="text-[#dfe7e0] font-mono font-medium">sohel.eightb@gmail.com</span>.
+            <span className="text-[#C2B280] font-mono font-medium">sohel.eightb@gmail.com</span>.
           </p>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-8">
+      <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 2xl:gap-12">
         {/* Direct Channel Column */}
-        <div className="lg:col-span-2 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-2 space-y-6"
+        >
           <SpotlightCard
-            spotlightColor="rgba(224, 35, 28, 0.16)"
-            className="p-6 sm:p-7 space-y-5"
+            spotlightColor="rgba(14, 118, 241, 0.18)"
+            className="p-6 sm:p-8 lg:p-9 space-y-6 rounded-2xl sm:rounded-3xl border border-[#C2B280]/15"
           >
-            <div className="border-b border-white/5 pb-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#78837c] uppercase">
+            <div className="border-b border-[#C2B280]/10 pb-4">
+              <span className="text-xs font-mono tracking-widest text-[#7A7568] uppercase">
                 Direct Channels
               </span>
-              <h3 className="text-base font-normal text-[#dfe7e0]">
+              <h3 className="text-lg sm:text-xl font-normal text-[#C2B280] mt-1">
                 Coordinates & Links
               </h3>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               {/* Email */}
-              <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#05070a] border border-white/5">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded bg-white/5 text-[#e0231c]">
-                    <Mail className="w-4 h-4" />
+              <div className="flex items-center justify-between p-4 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/10 hover:border-[#0E76F1]/40 transition-colors">
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 rounded-lg bg-[#C2B280]/10 text-[#0E76F1]">
+                    <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#78837c] font-mono uppercase tracking-wider">
+                    <div className="text-xs text-[#7A7568] font-mono uppercase tracking-wider">
                       Email
                     </div>
                     <a
                       href={`mailto:${PERSONAL_INFO.email}`}
-                      className="text-xs font-mono text-[#dfe7e0] hover:text-[#e0231c] transition-colors"
+                      className="text-xs sm:text-sm font-mono text-[#C2B280] hover:text-[#0E76F1] transition-colors break-all"
                     >
                       {PERSONAL_INFO.email}
                     </a>
@@ -162,30 +169,30 @@ export default function ContactSection() {
                 </div>
                 <button
                   onClick={() => handleCopy(PERSONAL_INFO.email, "email")}
-                  className="p-1.5 rounded text-[#78837c] hover:text-white"
+                  className="p-2 rounded-lg text-[#7A7568] hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
                   title="Copy email"
                 >
                   {copied === "email" ? (
-                    <Check className="w-3.5 h-3.5 text-[#e0231c]" />
+                    <Check className="w-4 h-4 text-[#0E76F1]" />
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-4 h-4" />
                   )}
                 </button>
               </div>
 
               {/* Phone */}
-              <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#05070a] border border-white/5">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded bg-white/5 text-[#e0231c]">
-                    <Phone className="w-4 h-4" />
+              <div className="flex items-center justify-between p-4 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/10 hover:border-[#0E76F1]/40 transition-colors">
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 rounded-lg bg-[#C2B280]/10 text-[#0E76F1]">
+                    <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[10px] text-[#78837c] font-mono uppercase tracking-wider">
+                    <div className="text-xs text-[#7A7568] font-mono uppercase tracking-wider">
                       Phone / WhatsApp
                     </div>
                     <a
                       href={`tel:${PERSONAL_INFO.phone}`}
-                      className="text-xs font-mono text-[#dfe7e0] hover:text-[#e0231c] transition-colors"
+                      className="text-xs sm:text-sm font-mono text-[#C2B280] hover:text-[#0E76F1] transition-colors"
                     >
                       {PERSONAL_INFO.phone}
                     </a>
@@ -193,27 +200,27 @@ export default function ContactSection() {
                 </div>
                 <button
                   onClick={() => handleCopy(PERSONAL_INFO.phone, "phone")}
-                  className="p-1.5 rounded text-[#78837c] hover:text-white"
+                  className="p-2 rounded-lg text-[#7A7568] hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
                   title="Copy phone"
                 >
                   {copied === "phone" ? (
-                    <Check className="w-3.5 h-3.5 text-[#e0231c]" />
+                    <Check className="w-4 h-4 text-[#0E76F1]" />
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-4 h-4" />
                   )}
                 </button>
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-3 p-3.5 rounded-lg bg-[#05070a] border border-white/5">
-                <div className="p-2 rounded bg-white/5 text-[#e0231c]">
-                  <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-3.5 p-4 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/10">
+                <div className="p-2.5 rounded-lg bg-[#C2B280]/10 text-[#0E76F1]">
+                  <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-[#78837c] font-mono uppercase tracking-wider">
+                  <div className="text-xs text-[#7A7568] font-mono uppercase tracking-wider">
                     Base
                   </div>
-                  <div className="text-xs font-mono text-[#dfe7e0]">
+                  <div className="text-xs sm:text-sm font-mono text-[#C2B280]">
                     {PERSONAL_INFO.location}
                   </div>
                 </div>
@@ -221,13 +228,13 @@ export default function ContactSection() {
             </div>
 
             {/* Social & Resume Links */}
-            <div className="pt-4 border-t border-white/5 space-y-3">
-              <div className="flex items-center gap-2">
+            <div className="pt-5 border-t border-[#C2B280]/10 space-y-4">
+              <div className="flex items-center gap-3">
                 <a
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-2 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#aab4ad] hover:text-white hover:border-white/25 transition-all"
+                  className="flex-1 inline-flex items-center justify-center gap-2.5 py-3 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#9A8E6A] hover:text-white hover:border-[#C2B280]/40 hover:bg-[#2B2D2F]/50 transition-all"
                 >
                   <GithubIcon className="w-4 h-4" />
                   <span>GitHub</span>
@@ -236,9 +243,9 @@ export default function ContactSection() {
                   href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-2 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#aab4ad] hover:text-white hover:border-white/25 transition-all"
+                  className="flex-1 inline-flex items-center justify-center gap-2.5 py-3 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#9A8E6A] hover:text-white hover:border-[#0E76F1]/40 hover:bg-[#2B2D2F]/50 transition-all"
                 >
-                  <LinkedinIcon className="w-4 h-4 text-[#e0231c]" />
+                  <LinkedinIcon className="w-4 h-4 text-[#0E76F1]" />
                   <span>LinkedIn</span>
                 </a>
               </div>
@@ -247,7 +254,7 @@ export default function ContactSection() {
                 <a
                   href={PERSONAL_INFO.resumePath}
                   download="Md_Kamruzzaman_CV.pdf"
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#e0231c] text-white text-xs font-mono tracking-wider uppercase shadow-lg shadow-[#e0231c]/25 hover:bg-[#ff4d36] transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 rounded-xl bg-[#0E76F1] text-white text-xs sm:text-sm font-mono tracking-wider uppercase shadow-lg shadow-[#0E76F1]/25 hover:bg-[#3D9BFF] hover:shadow-[#0E76F1]/40 transition-all cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Curriculum Vitae (PDF)</span>
@@ -255,71 +262,77 @@ export default function ContactSection() {
               </Magnet>
             </div>
           </SpotlightCard>
-        </div>
+        </motion.div>
 
         {/* Message Transmission Column */}
-        <div className="lg:col-span-3">
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="lg:col-span-3"
+        >
           <SpotlightCard
-            spotlightColor="rgba(224, 35, 28, 0.12)"
-            className="p-6 sm:p-8 space-y-5"
+            spotlightColor="rgba(14, 118, 241, 0.14)"
+            className="p-6 sm:p-8 lg:p-10 2xl:p-12 space-y-6 sm:space-y-7 rounded-2xl sm:rounded-3xl border border-[#C2B280]/15"
           >
-            <div className="border-b border-white/5 pb-3 flex items-center justify-between">
+            <div className="border-b border-[#C2B280]/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <span className="text-[10px] font-mono tracking-widest text-[#78837c] uppercase">
+                <span className="text-xs font-mono tracking-widest text-[#7A7568] uppercase">
                   Transmit
                 </span>
-                <h3 className="text-base font-normal text-[#dfe7e0]">
+                <h3 className="text-lg sm:text-xl font-normal text-[#C2B280] mt-1">
                   Leave a Dispatch
                 </h3>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-                <span className="text-[10px] font-mono text-[#aab4ad]">
-                  TO: <strong className="text-[#dfe7e0]">sohel.eightb@gmail.com</strong>
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <span className="w-2 h-2 rounded-full bg-[#0E76F1] animate-pulse" />
+                <span className="text-xs font-mono text-[#9A8E6A]">
+                  TO: <strong className="text-[#C2B280]">sohel.eightb@gmail.com</strong>
                 </span>
               </div>
             </div>
 
             {status === "success" ? (
-              <div className="p-8 rounded-xl bg-[#05070a] border border-[#e0231c]/40 text-center space-y-4 animate-in fade-in duration-300">
-                <div className="w-12 h-12 rounded-full bg-[#e0231c]/10 border border-[#e0231c]/30 flex items-center justify-center mx-auto text-[#e0231c]">
-                  <Check className="w-6 h-6" />
+              <div className="p-8 sm:p-12 rounded-2xl bg-[#1A1C1E] border border-[#0E76F1]/40 text-center space-y-5 animate-in fade-in duration-300">
+                <div className="w-14 h-14 rounded-full bg-[#0E76F1]/10 border border-[#0E76F1]/30 flex items-center justify-center mx-auto text-[#0E76F1]">
+                  <Check className="w-7 h-7" />
                 </div>
-                <div className="space-y-1">
-                  <div className="text-sm font-mono text-[#dfe7e0] tracking-wider uppercase">
+                <div className="space-y-2">
+                  <div className="text-base sm:text-lg font-mono text-[#C2B280] tracking-wider uppercase">
                     ✓ Dispatch Transmitted Directly to Gmail
                   </div>
-                  <p className="text-xs text-[#aab4ad] font-light max-w-sm mx-auto leading-relaxed">
-                    Your message was delivered directly to <span className="text-[#dfe7e0] font-mono font-medium">sohel.eightb@gmail.com</span>. Md. Kamruzzaman will review and reply to your email promptly.
+                  <p className="text-sm text-[#9A8E6A] font-light max-w-md mx-auto leading-relaxed">
+                    Your message was delivered directly to <span className="text-[#C2B280] font-mono font-medium">sohel.eightb@gmail.com</span>. Md. Kamruzzaman will review and reply to your email promptly.
                   </p>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-3">
                   <button
                     onClick={() => {
                       setStatus("idle");
                       setErrorMessage("");
                     }}
-                    className="px-5 py-2 rounded-lg border border-white/15 text-xs font-mono text-[#aab4ad] hover:text-white hover:bg-white/5 transition-all"
+                    className="px-6 py-2.5 rounded-xl border border-[#C2B280]/20 text-xs sm:text-sm font-mono text-[#9A8E6A] hover:text-white hover:bg-[#C2B280]/10 transition-all cursor-pointer"
                   >
                     Send Another Dispatch
                   </button>
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {status === "error" && (
-                  <div className="p-4 rounded-lg bg-[#e0231c]/10 border border-[#e0231c]/30 text-xs text-[#dfe7e0] space-y-2">
-                    <div className="flex items-center gap-2 font-mono text-[#e0231c]">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
+                  <div className="p-4 sm:p-5 rounded-xl bg-[#0E76F1]/10 border border-[#0E76F1]/30 text-xs sm:text-sm text-[#C2B280] space-y-2">
+                    <div className="flex items-center gap-2.5 font-mono text-[#0E76F1]">
+                      <AlertCircle className="w-5 h-5 shrink-0" />
                       <span>{errorMessage}</span>
                     </div>
                   </div>
                 )}
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#78837c]">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#7A7568]">
                       Name *
                     </label>
                     <input
@@ -329,12 +342,12 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Jane Doe"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#dfe7e0] focus:outline-none focus:border-[#e0231c] transition-colors"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#C2B280] focus:outline-none focus:border-[#0E76F1] focus:ring-1 focus:ring-[#0E76F1] transition-all placeholder:text-[#7A7568]/50"
                     />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#78837c]">
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono uppercase tracking-wider text-[#7A7568]">
                       Electronic Mail *
                     </label>
                     <input
@@ -344,13 +357,13 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="jane@organization.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#dfe7e0] focus:outline-none focus:border-[#e0231c] transition-colors"
+                      className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#C2B280] focus:outline-none focus:border-[#0E76F1] focus:ring-1 focus:ring-[#0E76F1] transition-all placeholder:text-[#7A7568]/50"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono uppercase tracking-wider text-[#78837c]">
+                <div className="space-y-2">
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#7A7568]">
                     Topic
                   </label>
                   <input
@@ -359,22 +372,22 @@ export default function ContactSection() {
                     value={formData.topic}
                     onChange={handleChange}
                     placeholder="Engineering Role / Technical Project Discussion"
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#dfe7e0] focus:outline-none focus:border-[#e0231c] transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#C2B280] focus:outline-none focus:border-[#0E76F1] focus:ring-1 focus:ring-[#0E76F1] transition-all placeholder:text-[#7A7568]/50"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono uppercase tracking-wider text-[#78837c]">
+                <div className="space-y-2">
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#7A7568]">
                     Message *
                   </label>
                   <textarea
                     name="message"
                     required
-                    rows={4}
+                    rows={5}
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Write your message here..."
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#05070a] border border-white/10 text-xs font-mono text-[#dfe7e0] focus:outline-none focus:border-[#e0231c] transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#1A1C1E] border border-[#C2B280]/15 text-xs sm:text-sm font-mono text-[#C2B280] focus:outline-none focus:border-[#0E76F1] focus:ring-1 focus:ring-[#0E76F1] transition-all placeholder:text-[#7A7568]/50"
                   />
                 </div>
 
@@ -383,16 +396,16 @@ export default function ContactSection() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#e0231c] text-white text-xs font-mono tracking-wider uppercase shadow-lg shadow-[#e0231c]/25 hover:bg-[#ff4d36] disabled:opacity-50 transition-all cursor-pointer"
+                      className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#0E76F1] text-white text-xs sm:text-sm lg:text-base font-mono tracking-wider uppercase shadow-lg shadow-[#0E76F1]/25 hover:bg-[#3D9BFF] hover:shadow-[#0E76F1]/40 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       {status === "loading" ? (
                         <>
-                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <Loader2 className="w-4 h-4 animate-spin" />
                           <span>Transmitting to Gmail...</span>
                         </>
                       ) : (
                         <>
-                          <Send className="w-3.5 h-3.5" />
+                          <Send className="w-4 h-4" />
                           <span>Transmit Message</span>
                         </>
                       )}
@@ -402,7 +415,7 @@ export default function ContactSection() {
               </form>
             )}
           </SpotlightCard>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -2,26 +2,29 @@
 @plugin "daisyui";
 
 :root {
-  --ink: #05070a;
-  --ink-2: #0a0e12;
-  --bone: #dfe7e0;
-  --bone-dim: #aab4ad;
-  --muted: #78837c;
-  --line: rgba(223, 231, 224, 0.12);
-  --line-soft: rgba(223, 231, 224, 0.06);
-  --vermilion: #e0231c;
-  --ember: #ff5a3c;
-  --gold: #c9a24a;
+  /* ── Charcoal / Sand / Electric Blue Palette ── */
+  --charcoal: #2B2D2F;
+  --charcoal-deep: #1A1C1E;
+  --charcoal-light: #3A3D40;
+  --sand: #C2B280;
+  --sand-dim: #9A8E6A;
+  --sand-light: #D4C89E;
+  --muted: #7A7568;
+  --electric: #0E76F1;
+  --electric-bright: #3D9BFF;
+  --electric-glow: #0A5FCA;
+  --line: rgba(194, 178, 128, 0.12);
+  --line-soft: rgba(194, 178, 128, 0.06);
 }
 
 body {
-  background-color: var(--ink);
-  color: var(--bone);
+  background-color: var(--charcoal-deep);
+  color: var(--sand);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 ::selection {
-  background: var(--vermilion);
+  background: var(--electric);
   color: #ffffff;
 }
 
@@ -30,18 +33,18 @@ body {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
 }
 
-/* Hanko / Vermilion Seal */
+/* Brand Seal — Electric Blue */
 .hanko-seal {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid var(--vermilion);
-  color: var(--vermilion);
+  border: 1.5px solid var(--electric);
+  color: var(--electric);
   font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
   font-weight: 700;
   line-height: 1;
-  text-shadow: 0 0 12px rgba(224, 35, 28, 0.4);
-  box-shadow: 0 0 14px rgba(224, 35, 28, 0.15);
+  text-shadow: 0 0 12px rgba(14, 118, 241, 0.4);
+  box-shadow: 0 0 14px rgba(14, 118, 241, 0.15);
 }
 
 @keyframes shine {
@@ -70,4 +73,62 @@ body {
 
 .animate-pulse-subtle {
   animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+/* ── Section reveal animations ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(14, 118, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(14, 118, 241, 0.6);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
 }

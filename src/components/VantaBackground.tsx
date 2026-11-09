@@ -13,8 +13,8 @@ interface VantaBackgroundProps {
 }
 
 export default function VantaBackground({
-  color = 0x6366f1,
-  backgroundColor = 0x090d16,
+  color = 0x0e76f1,
+  backgroundColor = 0x1a1c1e,
   points = 10,
   maxDistance = 22,
   spacing = 16,

@@ -19,8 +19,8 @@ export default function ShinyText({
     <span
       className={`inline-block bg-clip-text text-transparent ${
         disabled
-          ? "text-base-content"
-          : "bg-gradient-to-r from-base-content/40 via-base-content to-base-content/40 bg-[length:200%_auto] animate-shine"
+          ? "text-[#C2B280]"
+          : "bg-gradient-to-r from-[#C2B280]/40 via-[#C2B280] to-[#C2B280]/40 bg-[length:200%_auto] animate-shine"
       } ${className}`}
       style={{
         animationDuration,

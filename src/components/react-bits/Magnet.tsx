@@ -31,6 +31,14 @@ export default function Magnet({
       return;
     }
 
+    // Disable magnetic drag calculation on mobile touch devices
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches
+    ) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!magnetRef.current) return;
 

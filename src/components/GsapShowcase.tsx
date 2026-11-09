@@ -37,61 +37,61 @@ export default function GsapShowcase() {
     <div ref={containerRef} className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            <Orbit className="w-5 h-5 text-secondary animate-spin-slow" />
+          <h3 className="text-xl font-light text-[#C2B280] flex items-center gap-2">
+            <Orbit className="w-5 h-5 text-[#0E76F1] animate-spin" />
             GSAP & Timeline Animations
           </h3>
-          <p className="text-sm text-base-content/70">
+          <p className="text-sm text-[#7A7568]">
             Powered by GreenSock GSAP 3 & @gsap/react
           </p>
         </div>
-        <div className="badge badge-secondary badge-outline font-mono text-xs">
+        <div className="px-2.5 py-1 rounded border border-[#0E76F1]/30 bg-[#0E76F1]/10 text-[#0E76F1] font-mono text-xs">
           gsap.timeline()
         </div>
       </div>
 
       <div className="grid sm:grid-cols-3 gap-4">
-        <div className="gsap-card p-5 rounded-2xl bg-base-300/40 border border-base-content/10 backdrop-blur-sm space-y-3 hover:border-secondary/50 transition-colors">
+        <div className="gsap-card p-5 rounded-2xl bg-[#2B2D2F]/80 border border-[#C2B280]/10 backdrop-blur-sm space-y-3 hover:border-[#0E76F1]/50 transition-colors">
           <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-secondary/10 text-secondary">
+            <div className="p-2.5 rounded-xl bg-[#0E76F1]/10 text-[#0E76F1]">
               <Sparkles className="w-5 h-5" />
             </div>
-            <span className="gsap-floating-badge badge badge-sm badge-secondary">
+            <span className="gsap-floating-badge px-2 py-0.5 rounded bg-[#0E76F1]/20 text-[#0E76F1] text-xs font-mono">
               Spring Easing
             </span>
           </div>
-          <h4 className="font-semibold text-base">Physics-Based Tweens</h4>
-          <p className="text-xs text-base-content/70 leading-relaxed">
+          <h4 className="font-normal text-base text-[#C2B280]">Physics-Based Tweens</h4>
+          <p className="text-xs text-[#9A8E6A] leading-relaxed">
             Ultra-smooth velocity, elastic physics, and custom Bezier motion curves.
           </p>
         </div>
 
-        <div className="gsap-card p-5 rounded-2xl bg-base-300/40 border border-base-content/10 backdrop-blur-sm space-y-3 hover:border-primary/50 transition-colors">
+        <div className="gsap-card p-5 rounded-2xl bg-[#2B2D2F]/80 border border-[#C2B280]/10 backdrop-blur-sm space-y-3 hover:border-[#3D9BFF]/50 transition-colors">
           <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+            <div className="p-2.5 rounded-xl bg-[#3D9BFF]/10 text-[#3D9BFF]">
               <Layers className="w-5 h-5" />
             </div>
-            <span className="gsap-floating-badge badge badge-sm badge-primary">
+            <span className="gsap-floating-badge px-2 py-0.5 rounded bg-[#3D9BFF]/20 text-[#3D9BFF] text-xs font-mono">
               Orchestration
             </span>
           </div>
-          <h4 className="font-semibold text-base">Complex Sequences</h4>
-          <p className="text-xs text-base-content/70 leading-relaxed">
+          <h4 className="font-normal text-base text-[#C2B280]">Complex Sequences</h4>
+          <p className="text-xs text-[#9A8E6A] leading-relaxed">
             Frame-accurate timeline synchronization paired with Lenis smooth scrolling.
           </p>
         </div>
 
-        <div className="gsap-card p-5 rounded-2xl bg-base-300/40 border border-base-content/10 backdrop-blur-sm space-y-3 hover:border-accent/50 transition-colors">
+        <div className="gsap-card p-5 rounded-2xl bg-[#2B2D2F]/80 border border-[#C2B280]/10 backdrop-blur-sm space-y-3 hover:border-[#C2B280]/50 transition-colors">
           <div className="flex items-center justify-between">
-            <div className="p-2.5 rounded-xl bg-accent/10 text-accent">
+            <div className="p-2.5 rounded-xl bg-[#C2B280]/10 text-[#C2B280]">
               <Cpu className="w-5 h-5" />
             </div>
-            <span className="gsap-floating-badge badge badge-sm badge-accent">
+            <span className="gsap-floating-badge px-2 py-0.5 rounded bg-[#C2B280]/20 text-[#C2B280] text-xs font-mono">
               Zero Jank
             </span>
           </div>
-          <h4 className="font-semibold text-base">Hardware Accelerated</h4>
-          <p className="text-xs text-base-content/70 leading-relaxed">
+          <h4 className="font-normal text-base text-[#C2B280]">Hardware Accelerated</h4>
+          <p className="text-xs text-[#9A8E6A] leading-relaxed">
             High-framerate transform3d pipelines optimized for modern mobile and desktop screens.
           </p>
         </div>

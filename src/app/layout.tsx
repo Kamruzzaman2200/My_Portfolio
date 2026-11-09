@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="dark"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#05070a] text-[#dfe7e0] selection:bg-[#e0231c] selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#1A1C1E] text-[#C2B280] selection:bg-[#0E76F1] selection:text-white">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
